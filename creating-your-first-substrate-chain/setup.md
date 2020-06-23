@@ -31,3 +31,20 @@ Si usted está utilizando Windows y no dispone de Windows Subsystem for Linux, e
 
 ## Compilando Substrate
 
+Una vez que todo está instalado, necesitas configurar el esqueleto para nuestro proyecto. Afortunadamente, hay una plantilla de proyecto simple (simple template proyect) para ayudarle a empezar en el desarrollo con substrate.
+
+1. Clonar el Substrate Node Template
+    `git clone https://github.com/substrate-developer-hub/substrate-node-template`
+2. Inicializa tu entorno de desarrollo para WebAssembly
+    # Update Rust
+    `rustup update nightly`
+    `rustup update stable`
+
+    # Add Wasm target
+    `rustup target add wasm32-unknown-unknown --toolchain nightly`
+3. Compila tu nodo Substrate
+    `cd substrate-node-template/`
+    `cargo build --release`
+Este proceso de compilación puede tardar en torno a 25 minutos dependiendo del hardware. En ese tiempo, lee la siguiente sección para aprender más acerca de Substrate.
+
+
