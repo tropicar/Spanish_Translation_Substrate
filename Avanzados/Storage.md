@@ -44,7 +44,28 @@ Las Blockchains que son creadas con Substrate tienen un servidor RPC(Remote Proc
 
 ### Storage value keys
 
-Para calcular la clave para un valor simple del storage, calcula el TwoX 128 hash del nombre del módulo que contiene el valor del storage y añádelo al hash TwoX 128 del nombre del valor del Storage. Por ejemplo, el pallet [Sudo][Sudo] dispone de un item llamado Storage Value.
+Para calcular la clave para un valor simple del storage, calcula el TwoX 128 hash del nombre del módulo que contiene el valor del storage y añádelo al hash TwoX 128 del nombre del valor del Storage. Por ejemplo, el pallet [Sudo][Sudo] dispone de un item llamado Module.html#method.key">Key:
+
+~~~
+twox_128("Sudo")                   = "0x5c0d1176a568c1f92944340dbfed9e9c"
+twox_128("Key)                     = "0x530ebca703c85910e7164cb7d1c9e47b"
+twox_128("Sudo") + twox_128("Key") = "0x5c0d1176a568c1f92944340dbfed9e9c530ebca703c85910e7164cb7d1c9e47b"
+~~~
+
+Si la conocida cuenta de Alide es el "sudo user", una petición RPC y responde para leer el Sudo module's key, el Storage Value podría ser representado como: 
+
+~~~
+state_getStorage("0x5c0d1176a568c1f92944340dbfed9e9c530ebca703c85910e7164cb7d1c9e47b") = "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d"
+~~~
+
+En ese caso, el valor que devuelve (0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d) es el ID(5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY) de la cuenta de Alice codificado en SCALE.
+
+Puede que hayas notado que el algoritmo de hash TwoX 128 no es criptográfico y que se utiliza para generar las Storage Value keys. Ésto se debe a que no es necesario pagar el coste del rendimiento asociado a una función criptográfica de hash dado que la entrada de la función del hash( los nombres del módulo y el storage item) está determinada por el desarrollador del runtime y no por los posibles usuarios maliciosos de la blockchain.
+
+### Storage Map Keys
+
+Al igual que los Storage values, las claves de Storage Maps  se calcula el hash con la función TwoX 128 del nombre del módulo que contiene el mapa seguido del hash del nombre del propio Storage Map. Para recuperar un elemento del mapa, simplemente añade el hash de la key del mapa que desees a la storage key del Storage Map.Para mapas que tengan 2 claves (Storage Double Maps), añade el hash de la clave del primer mapa seguida del hash de la clave del segundo mapa a la Storage Double Map's storage key.Al igual que las Storage values, Substrate usará el algoritmo de hash Two 128 en el nombre del módulo y en el nombre de Storage Map, pero necesitarás asegurarte de usar el algoritmo correcto (El que fue declarado en el macro decl_storage) cuando determines los hashes de las claves para los elementos en el mapa.
+
 
 ## Referencias
 
