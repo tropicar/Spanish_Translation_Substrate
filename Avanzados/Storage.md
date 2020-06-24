@@ -55,9 +55,14 @@ Para calcular la clave para un valor simple del storage, calcula el TwoX 128 has
 [state_db]: https://crates.parity.io/sc_state_db/index.html
 [Sudo]: https://crates.parity.io/pallet_sudo/index.html
 
-RocksDB: https://rocksdb.org/
+RocksDB: https://rocksdb.org/ 
+
 ParityDB: https://github.com/paritytech/parity-db
+
 paritytech/trie: https://github.com/paritytech/trie
+
 reference counting: http://en.wikipedia.org/wiki/Reference_counting
+
 state_db: https://crates.parity.io/sc_state_db/index.html
+
 Sudo: https://crates.parity.io/pallet_sudo/index.html
