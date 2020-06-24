@@ -5,14 +5,17 @@ En esta sección vamos a enseñarle acerca el framework de desarrollo de blockch
 ## Background en Blockchains
 
 El desarrollo Blockchain es difícil.
+
 Las redes blockchain se componen de nodos individuales conectados entre si en una red peer-to-peer (P2P). Los nodos son ordenadores individuales en una red donde se está ejecutando el software de blockchain, el cuál hace que todo funcione.
+
 Para funcionar, un nodo blockchain necesita:
-Una Base de datos
-Red P2P
-Algoritmo de consenso (A consensus Engine)
-Manejo de transacciones (Transaction Handling)
-Manejo de transacciones (Transaction Handling)
-y más...
+- Una Base de datos
+- Red P2P
+- Algoritmo de consenso (A consensus Engine)
+- Manejo de transacciones (Transaction Handling)
+- Manejo de transacciones (Transaction Handling)
+- y más...
+
 Estas tecnologías abarcan muchos campos dentro de la informática y, por lo tanto, requiere de equipos de expertos para desarrollarse. As a result, most blockchain projects are not developed from the ground up. En lugar de eso, estos proyectos están bifurcados desde repositorios de blockchain ya existentes. Por ejemplo:
 El repositorio de Bitcoin fue bifurcado para crear: Litecoin, ZCash, Namecoin, Bitcoin Cash, etc...
 EL repositorio de Ethereum fue bifurcado para crear: Quorem, POA Network, KodakCoin, Musicoin, etc...
