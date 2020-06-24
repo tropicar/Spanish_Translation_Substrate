@@ -9,7 +9,7 @@ Substrate implementa la base de datso del storage con [RocksDB][RocksDB], que es
 Ésto es utilizado por todos los componentes de Substrate que requieran almacenamiento persistente, tal y como son:
 
 - Clientes de Substrate (Substrate Clients)
-- Clientes "iluminados" de Substrate (Substrate light-clients)
+- Clientes "ligeros" de Substrate (Substrate light-clients)
 - Trabajadores off-chain (Off-chain workers)
 
 ## Trie Abstraction ("Abstracción del árbol digital")
@@ -54,3 +54,10 @@ Para calcular la clave para un valor simple del storage, calcula el TwoX 128 has
 [reference counting]: http://en.wikipedia.org/wiki/Reference_counting
 [state_db]: https://crates.parity.io/sc_state_db/index.html
 [Sudo]: https://crates.parity.io/pallet_sudo/index.html
+
+RocksDB: https://rocksdb.org/
+ParityDB: https://github.com/paritytech/parity-db
+paritytech/trie: https://github.com/paritytech/trie
+reference counting: http://en.wikipedia.org/wiki/Reference_counting
+state_db: https://crates.parity.io/sc_state_db/index.html
+Sudo: https://crates.parity.io/pallet_sudo/index.html
