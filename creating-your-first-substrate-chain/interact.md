@@ -6,12 +6,19 @@ Ahora que su nodo ha terminado de compilar, vamos a mostrarle cómo funciona tod
 
 Ejecuta los siguientes comandos para inicializar su nodo:
 `cd substrate-node-template/`
+
 `#purge-chain elimina los resto de datos antiguos después de ejecutar un nodo en modo 'dev' en el pasado`
+
 `#Te pedirá que escribras 'y'o 's'`
+
 `./target/release/node-template purge-chain --dev`
+
 `#Ejecuta tu nodo en modo "developer"` 
+
 `./target/release/node-template --dev`
+
 Debería ver algo parecido a ésto si su nodo está ejecutándose correctamente:
+
 `./target/release/node-template --dev`
 
 ~~~
