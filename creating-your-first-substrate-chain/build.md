@@ -48,7 +48,7 @@ A alto nivel, un pallet de Substrate puede dividirse en cinco secciones:
 
 Los events (eventos), storage (almacenamiento), y callable functions (funcionas llamables) deberían serte familiar en el caso de que hayas trabajado en el desarrollo blockchain. Te mostraremos cómo se ven cada uno de estos componentes para un pallet básico de "Proof Of Existence".
 
-## Importaciones
+### Importaciones
 
 Ya que las importaciones son bastante aburridas, puedes empezar copiando esto en la parte superior de tu archivo template.rs:
 
@@ -56,7 +56,7 @@ Ya que las importaciones son bastante aburridas, puedes empezar copiando esto en
 `use system::ensure_signed;`
 `use sp_std::vec::Vec;`
 
-## Configuración del Pallet
+### Configuración del Pallet
 Por ahora, lo único que vamos a configurar sobre el pallet es que emitirá algunos eventos.
 
 ~~~
@@ -67,7 +67,7 @@ pub trait Trait: system::Trait {
 }
 ~~~
 
-## Eventos del Pallet
+### Eventos del Pallet
 
 Después de que hayamos configurado nuestro pallet para emitir eventos, vamos a definir qué eventos:
 
@@ -75,23 +75,23 @@ Después de que hayamos configurado nuestro pallet para emitir eventos, vamos a 
 // Los eventos de este palet.
 decl_event! {
     pub enum Event<T> where AccountId = <T as system::Trait>::AccountId {
-        /// Event emitted when a proof has been claimed.
+        /// Un evento emitido cuando una proof ha sido registrada
         ClaimCreated(AccountId, Vec<u8>),
-        /// Event emitted when a claim is revoked by the owner.
+        /// Un evento cuando un registro es revocada por su propietario
         ClaimRevoked(AccountId, Vec<u8>),
     }
 }
 ~~~
 
-Nuestro palet solo tendrá dos eventos:
-- Cuando se añade una nueva "proof" (prueba) a la cadena de bloques.
-- Cuando se elimina una "proof" (prueba).
+Nuestro pallet solo tendrá dos eventos:
+1. Cuando se añade una nueva "proof" (prueba) a la cadena de bloques.
+2. Cuando se elimina una "proof" (prueba).
 
 Los eventos pueden contener algunos metadatos, en ese caso, cada evento mostrará quién activó dicho evento (AccountId), y los datos de prueba o "proof data" (como Vec<u8>) que están siendo almacenados o eliminados.
 
-## Pallet Storage Items (Almacenamiento de items del pallet)
+### Pallet Storage Items (Almacenamiento de items del pallet)
 
-Para añadir una nueva proof (prueba) a la blochain, simplemente almacenaremos en el storage del pallet. Para almacenar este valor, crearemos un hash map relacionando la proof a el propietario de dicha proof y al número de bloque donde fue creada.
+Para añadir una nueva proof (prueba) a la blockchain, simplemente almacenaremos en el storage del pallet. Para almacenar este valor, crearemos un hash map relacionando la proof a el propietario de dicha proof y al número de bloque donde fue creada.
 
 ~~~
 // This pallet's storage items.
@@ -110,8 +110,8 @@ Si una proof tiene un propietario y un número de bloque, entonces, sabemos que 
 
 Tal y como definimos los eventos del pallet, tendremos dos funciones que el usuario puede llamar en el pallet de Substrate:
 
-- create_(): Permite a un usuario reclamar la existencia de un archivo con una proof.
-- revoke_claim(): Permite al propietario revokar su reclamación.
+1. create_(): Permite a un usuario reclamar la existencia de un archivo con una proof.
+2. revoke_claim(): Permite al propietario revokar su reclamación.
 
 Aquí está la declaración del pallet con las dos funciones definidas:
 
@@ -176,9 +176,10 @@ Después de haber copiado correctamente todas las partes de este pallet en templ
 `cargo build --release`
 
 Ahora puede reiniciar el nodo:
-Purga la cadena para eliminar antiguos estados 
-Te pedirá que aceptes escribiendo 'y'
+`#Purga la cadena para eliminar antiguos estados `
+`#Te pedirá que aceptes escribiendo 'y'`
 `./target/release/node-template purge-chain --dev`
-Vuelve a ejecutar el nodo en modo "developer" o desarrollador
+`#Vuelve a ejecutar el nodo en modo "developer" o desarrollador`
 `./target/release/node-template --dev`
+
 ¡Ahora es el momento de interactuar con nuestro nuevo pallet de Proof Of Existence!
