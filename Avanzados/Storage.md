@@ -66,6 +66,45 @@ Puede que hayas notado que el algoritmo de hash TwoX 128 no es criptográfico y 
 
 Al igual que los Storage values, las claves de Storage Maps  se calcula el hash con la función TwoX 128 del nombre del módulo que contiene el mapa seguido del hash del nombre del propio Storage Map. Para recuperar un elemento del mapa, simplemente añade el hash de la key del mapa que desees a la storage key del Storage Map.Para mapas que tengan 2 claves (Storage Double Maps), añade el hash de la clave del primer mapa seguida del hash de la clave del segundo mapa a la Storage Double Map's storage key.Al igual que las Storage values, Substrate usará el algoritmo de hash Two 128 en el nombre del módulo y en el nombre de Storage Map, pero necesitarás asegurarte de usar el algoritmo correcto (El que fue declarado en el macro decl_storage) cuando determines los hashes de las claves para los elementos en el mapa.
 
+Aquí tenemos un ejemplo que ilustra la consulta de un Storage Map llamado FreeBalance desde un módulo denominado "Balances", que se utiliza para el balance de la cuenta de Alice.En este ejemplo, el mapa FreeBalance está usando el algoritmo de hashing transparente Blake2 128 Concat:
+
+~~~
+twox_128("Balances)                                              = "0xc2261276cc9d1f8598ea4b6a74b15c2f"
+twox_128("FreeBalance")                                          = "0x6482b9ade7bc6657aaca787ba1add3b4"
+scale_encode("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY") = "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d"
+
+blake2_128_concat("0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d") = "0xde1e86a9a8c739864cf3cc5ec2bea59fd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d"
+
+state_getStorage("0xc2261276cc9d1f8598ea4b6a74b15c2f6482b9ade7bc6657aaca787ba1add3b4de1e86a9a8c739864cf3cc5ec2bea59fd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d") = "0x0000a0dec5adc9353600000000000000"
+~~~
+
+El valor que devuelve la petición al storage("0x0000a0dec5adc9353600000000000000" en el ejemplo de arriba) es el valor del balance de la cuenta de Alice("1000000000000000000000" en este ejemplo) codificado en SCALE.Tenga en cuenta que antes de calcular el Hash del ID de la cuenta de Alice tiene que estas codificado en SCALE.Tenga en cuenta también, que la salida de la función blake2_128_concat consiste en 32 carácteres hexadecimales seguidos de la entrada de la función.Esto es debido a que Blake2 128 Concat es un algoritmo de hashing transparente.Aunque el ejemplo de arriba pueda hacer parecer que es una característica superflua, esta utilidad llega a tener relevancia cuando el objetivo es iterar sobre las claves en el mapa (en oposición a recuperar el valor asociado a una sola clave).La capacidad de iterar sobre las claves en un mapa es un requisito común para permitir que la gente pueda usar el mapa de la manera que parece natural(como en las UI, User Interface): en primer lugar, a un usuario se le muestra una lista de elementos en el mapa, entonces, este usuario puede seleccionar el elemento en el que esté interesado, y realizar una petición al mapa para obtener más detalles sobre ese elemento en particular.Éste es otro ejemplo que utiliza el mismo ejemplo del Storage Map (un mapa llamado FreeBalances que utiliza el algoritmo de hashing  Blake2 128 Concat en un módulo denominado "Balances" ) que muestra el uso del Substrate RPC para hacer peticiones al Storage Map de su lista de claves mediante state_getKeys en el endpoint del RPC:
+
+~~~
+twox_128("Balances)                                       = "0xc2261276cc9d1f8598ea4b6a74b15c2f"
+twox_128("FreeBalance")                                   = "0x6482b9ade7bc6657aaca787ba1add3b4"
+
+state_getKeys("0xc2261276cc9d1f8598ea4b6a74b15c2f6482b9ade7bc6657aaca787ba1add3b4") = [
+    "0xc2261276cc9d1f8598ea4b6a74b15c2f6482b9ade7bc6657aaca787ba1add3b4de1e86a9a8c739864cf3cc5ec2bea59fd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d",
+    "0xc2261276cc9d1f8598ea4b6a74b15c2f6482b9ade7bc6657aaca787ba1add3b432a5935f6edc617ae178fef9eb1e211fbe5ddb1579b72e84524fc29e78609e3caf42e85aa118ebfe0b0ad404b5bdd25f",
+    ...
+]
+~~~
+
+Cada elemento de la lista que es devuelto por el endpoint state_getKeys del RPC de Substrate, puede ser, directamente, usado como entrada en el enpoint state_getStorage de RPC.De hecho, el primer elemento en la lista del ejemplo de arriba es equivalente a la entrada usada para  la petición state_getStorage utilizada en el ejemplo anterior(El utilizado para encontrar el balance de Alice).Debido a que el mapa al que pertenecen  estas claves usan un algoritmo de hashing transparente para generar sus claves, es posible determinar la cuenta asociada con el segundo elemento de la lista.Observa que cada elemento de la lista es un valor hexadecimal que comienza con los mismos 64 caracteres; ésto se debe a que cada elemento representa una clave en el mismo mapa, y dicho mapa es identificado por la concatenación de dos hashes TwoX 128, cada uno de ellos es de 128-bits, o 32 caracteres hexadecimales. Después de descartar la parte correspondiente al segundo elemento de la lista, te  quedarías con 0x32a5935f6edc617ae178fef9eb1e211fbe5ddb1579b72e84524fc29e78609e3caf42e85aa118ebfe0b0ad404b5bdd25f.
+Viste en el ejemplo anterior que ésto representa el hash calculado con Blake2 128 de algún ID de una cuenta codificado en SCALE. El algoritmo Blake 128 concat para calcular hashes consiste en añadir (concatenar) las entradas del algoritmo de hash a su hash Blake 128. Esto significa que los primeros 128 bits (o los 32 caracteres hexadecimales) del Blake2 128 Concat hash representan un hash Blake2 128, y el resto representa el valor pasado al algoritmo Blake 2 128.
+
+En este ejemplo, después de eliminar los primeros 32 caracteres hexadecimales que representan el hash Blake2 128(por ejemplo, 0x32a5935f6edc617ae178fef9eb1e211f)lo que queda es el valor hexadecimal code>0xbe5ddb1579b72e84524fc29e78609e3caf42e85aa118ebfe0b0ad404b5bdd25f, que es el ID de una cuenta codificado en SCALE.Decodificar este valor se obtiene el siguiente resultado 5GNJqTPyNqANBkUVMN1LPPrxXnFouWXoe2wNSmmEoLctxiZY, que es la ID de una cuenta que nos es familiar, la cuenta de Alice_Stash.
+
+## Runtime Storage API
+
+El [FRAME][FRAME Support crate] de Substrate proporciona herramientas para generar claves únicas, deterministas para los item del storage de tu runtime. Estos items del storage están almacenados en el state trie y son accesibles mediante peticiones  al árbol usando la clave.
+
+## Siguientes Pasos
+
+### Aprende Más
+
+- Aprende como añadir items al storage en tus módulos del runtime de Substrate.
 
 ## Referencias
 
@@ -75,6 +114,7 @@ Al igual que los Storage values, las claves de Storage Maps  se calcula el hash 
 [reference counting]: http://en.wikipedia.org/wiki/Reference_counting
 [state_db]: https://crates.parity.io/sc_state_db/index.html
 [Sudo]: https://crates.parity.io/pallet_sudo/index.html
+[FRAME]: https://crates.parity.io/frame_support/index.htm
 
 RocksDB: https://rocksdb.org/ 
 
@@ -87,3 +127,5 @@ reference counting: http://en.wikipedia.org/wiki/Reference_counting
 state_db: https://crates.parity.io/sc_state_db/index.html
 
 Sudo: https://crates.parity.io/pallet_sudo/index.html
+
+Frame support crate: https://crates.parity.io/frame_support/index.htm
