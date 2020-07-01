@@ -67,7 +67,7 @@ Nota: Las versiones del runtime se configuran de forma manual.Por lo tanto, el e
 
 ### Actualización del Runtime sin bifurcaciones
 
-Las blockchaines tradicionales requieren de un [hardfork][hard fork] cuando actualizan la función de transición de estado de su cadena.Ésto requiere que los operadores de los nodos detengan sus nodos, y manualmente actualicen al ejecutable actual.Para redes distribuidas en producción, la coordinación de las actualizaciones usando hard fork puede ser un proceso complejo.
+Las blockchaines tradicionales requieren de un [hardfork][hardfork] cuando actualizan la función de transición de estado de su cadena.Ésto requiere que los operadores de los nodos detengan sus nodos, y manualmente actualicen al ejecutable actual.Para redes distribuidas en producción, la coordinación de las actualizaciones usando hard fork puede ser un proceso complejo.
 
 Lo que consiguen las propiedades listadas en esta página, permiten a las blockchain creadas con Substrate hacer "actualizaciones del runtime sin bifurcaciones".Ésto quiere decir que la actualización de la lógica del runtime puede ocurrir en tiempo real sin provocar ningún fork en la red.
 
@@ -80,4 +80,4 @@ or authoring_version no coincide con el nuevo runtime en Wasm.Como resultado, é
 
 - Saber más al respecto
 
- hardfork:https://en.wikipedia.org/wiki/Fork_(blockchain)
+ hardfork: https://en.wikipedia.org/wiki/Fork_(blockchain)
