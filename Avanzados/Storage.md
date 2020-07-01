@@ -52,7 +52,7 @@ twox_128("Key)                     = "0x530ebca703c85910e7164cb7d1c9e47b"
 twox_128("Sudo") + twox_128("Key") = "0x5c0d1176a568c1f92944340dbfed9e9c530ebca703c85910e7164cb7d1c9e47b"
 ~~~
 
-Si la conocida cuenta de Alide es el "sudo user", una petición RPC y responde para leer el Sudo module's key, el Storage Value podría ser representado como: 
+Si la conocida cuenta de Alice es el "sudo user", una petición RPC y responde para leer el Sudo module's key, el Storage Value podría ser representado como: 
 
 ~~~
 state_getStorage("0x5c0d1176a568c1f92944340dbfed9e9c530ebca703c85910e7164cb7d1c9e47b") = "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d"
