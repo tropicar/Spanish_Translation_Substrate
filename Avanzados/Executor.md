@@ -80,4 +80,4 @@ or authoring_version no coincide con el nuevo runtime en Wasm.Como resultado, é
 
 - Saber más al respecto
 
- hardfork: https://en.wikipedia.org/wiki/Fork_(blockchain)
+hardfork: https://en.wikipedia.org/wiki/Fork_(blockchain)
