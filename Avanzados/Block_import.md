@@ -35,9 +35,9 @@ El BlockImport anidado no necesita estar limitado a un nivel. El BlockImport ani
 
 Varias de las guías de nodos explican la block import pipeline:
 
-- [Manual_Seal][Manual Seal] todos los bloques son válidos, por lo que el block import pipeline está solo en el cliente
-- [Basic_PoW][Basic PoW] el import pipeline incluye PoW y el cliente
-- [Hybrid_Consensus][Hybrid Consensus] the import pipeline is PoW, then Grandpa, then the client
+- [ManualSeal][ManualSeal] todos los bloques son válidos, por lo que el block import pipeline está solo en el cliente
+- [BasicPoW][BasicPoW] el import pipeline incluye PoW y el cliente
+- [HybridConsensus][HybridConsensus] the import pipeline is PoW, then Grandpa, then the client
 
 
 
@@ -52,6 +52,6 @@ Varias de las guías de nodos explican la block import pipeline:
 [PowBlockImport]: https://crates.parity.io/sc_consensus_pow/struct
 [AuraBlockImport]: https://crates.parity.io/sc_consensus_aura/struct
 [BabeBlockImport]: https://crates.parity.io/sc_finality_grandpa/struct
-[Manual_Seal]: https://substrate.dev/recipes/3-entrees/manual-seal.html
-[Basic_Pow]: https://substrate.dev/recipes/3-entrees/basic-pow.html
-[Hybrid_Consensus]: https://substrate.dev/recipes/3-entrees/hybrid-consensus.html
+[ManualSeal]: https://substrate.dev/recipes/3-entrees/manual-seal.html
+[BasicPow]: https://substrate.dev/recipes/3-entrees/basic-pow.html
+[HybridConsensus]: https://substrate.dev/recipes/3-entrees/hybrid-consensus.html
