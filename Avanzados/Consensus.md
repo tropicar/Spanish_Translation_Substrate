@@ -118,10 +118,10 @@ No todos los protocolos de consenso definen una cadena única y canónica. Algun
 
 
 
-maquina_de_estado : https://en.wikipedia.org/wiki/Finite-state_machine
-SelectChain : https://crates.parity.io/sp_consensus/trait
-LongestChain : https://crates.parity.io/sc_consensus/struct
-Aura : https://crates.parity.io/sc_consensus_aura/index.html
-BABE : https://crates.parity.io/sc_consensus_babe/index.html
-proof of work : https://crates.parity.io/sc_consensus_pow/index.html
-GRANDPA : https://crates.parity.io/sc_finality_grandpa/index.html
+maquina_de_estado: https://en.wikipedia.org/wiki/Finite-state_machine
+SelectChain: https://crates.parity.io/sp_consensus/trait
+LongestChain: https://crates.parity.io/sc_consensus/struct
+Aura: https://crates.parity.io/sc_consensus_aura/index.html
+BABE: https://crates.parity.io/sc_consensus_babe/index.html
+proof of work: https://crates.parity.io/sc_consensus_pow/index.html
+GRANDPA: https://crates.parity.io/sc_finality_grandpa/index.html
