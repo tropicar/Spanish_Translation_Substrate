@@ -67,15 +67,27 @@ Un sacrificio que se hace al usar firmas Schnorr sobre ECDSA es que ambos requie
 
 
 [Blake2]: https://en.wikipedia.org/wiki/BLAKE_(hash_function)#BLAKE2
+
 [Zcash][Zcash]: https://en.wikipedia.org/wiki/Zcash
+
 [Blake-2]: https://docs.rs/blake2/
+
 [Pair]: https://crates.parity.io/sp_core/crypto/trait
+
 [ECDSA]: https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm
+
 [secp256k1]: https://en.bitcoin.it/wiki/Secp256k1
+
 [Bitcoin]: https://en.wikipedia.org/wiki/Bitcoin
+
 [Ethereum]: https://en.wikipedia.org/wiki/Ethereum
+
 [Ed25519]: https://en.wikipedia.org/wiki/EdDSA#Ed25519
+
 [Curve25519]: https://en.wikipedia.org/wiki/Curve25519
+
 [SR25519]: https://research.web3.foundation/en/latest/polkadot/keys/1-accounts-more.html
+
 [wiki]: https://research.web3.foundation
+
 [verificar-las-firmas-de-Ethereum-en-el-runtime-de-Substrate]: https://github.com/paritytech/polkadot/blob/master/runtime/common/src/claims.rs
