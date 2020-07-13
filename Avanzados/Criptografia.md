@@ -68,7 +68,7 @@ Un sacrificio que se hace al usar firmas Schnorr sobre ECDSA es que ambos requie
 
 [Blake2]: https://en.wikipedia.org/wiki/BLAKE_(hash_function)#BLAKE2
 
-[Zcash][Zcash]: https://en.wikipedia.org/wiki/Zcash
+[Zcash]: https://en.wikipedia.org/wiki/Zcash
 
 [Blake-2]: https://docs.rs/blake2/
 
