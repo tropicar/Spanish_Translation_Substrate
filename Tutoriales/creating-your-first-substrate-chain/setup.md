@@ -1,5 +1,5 @@
 # Setup
-Normalmente le enseñaremos sobre el framework de desarrollo de blockchain Substrate, sin embargo, configurar tu equipo para desarrollar en Substrate puede tomar tiempo.
+Normalmente le enseñaremos más sobre el framework de desarrollo de blockchain Substrate, sin embargo, configurar tu equipo para desarrollar en Substrate puede tomar tiempo.
 
 Para optimizar tu tiempo, tendremos que comenzar por el proceso de configuración. En la siguiente sección, mientras esté compilando, aprenderá más sobre Substrate y lo qué estamos "instalando".
 
